@@ -12,10 +12,27 @@ namespace Organizer
         private DateTime date;
         private String name;
         private String description;
-        private List<String> tags;
+        private List<String> tags = new List<String>();
         private int priority;
-        private List<Task> childr;
+        private List<Task> childr = new List<Task>();
         private Boolean complete;
+        public Task()
+        {
+            date = new DateTime(0);
+            cycle = new TimeSpan(0);
+            name = "";
+            description = "";
+            complete = false;
+        }
+        public Task(Task parent)
+        {
+            date = new DateTime(0);
+            cycle = new TimeSpan(0);
+            name = "";
+            description = "";
+            complete = false;
+            parent.AddKid(this);
+        }
         public TimeSpan Cycle
         {
             get { return cycle; }
@@ -64,6 +81,20 @@ namespace Organizer
                 throw new Exception("Заданного тега не существует");
             }
         }
-
+        public void Complete() { complete = true; }
+        public void Uncomplete() { complete = false; }
+        public static Boolean operator >(Task a, Task b) {return a.priority > b.priority;}
+        public static Boolean operator <(Task a,Task b){ return a.priority < b.priority; }
+        public void AddKid(Task t)
+        {
+            if (!childr.Contains(t))
+            {
+                childr.Add(t);
+            }
+        }
+        public void RemKid(Task t)
+        {
+            childr.Remove(t);
+        }
     }
 }
