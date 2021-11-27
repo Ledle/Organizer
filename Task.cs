@@ -8,6 +8,7 @@ namespace Organizer
 {
     class Task
     {
+        private Group group;
         private TimeSpan cycle;
         private DateTime date;
         private String name;
@@ -27,11 +28,27 @@ namespace Organizer
         public Task(Task parent)
         {
             date = new DateTime(0);
-            cycle = new TimeSpan(0);
+            cycle = TimeSpan.Zero;
             name = "";
             description = "";
             complete = false;
             parent.AddKid(this);
+        }
+        public Task Clone()
+        {
+            Task t = new Task();
+            t.group = group;
+            t.name = name;
+            t.description = description;
+            t.priority = priority;
+            t.tags = tags;
+            t.date = date;
+            t.cycle = cycle;
+            foreach (Task kid in childr)
+            {
+                t.childr.Add(kid.Clone());
+            }
+            return t;
         }
         public TimeSpan Cycle
         {
@@ -67,6 +84,10 @@ namespace Organizer
             get { return description; }
             set { description = value; }
         }
+        public Boolean Completed
+        {
+            get { return complete; }
+        }
         public void AddTag(String tag)
         {
             if (tags.Contains(tag))
@@ -81,7 +102,15 @@ namespace Organizer
                 throw new Exception("Заданного тега не существует");
             }
         }
-        public void Complete() { complete = true; }
+        public void Complete() {
+            if(cycle != TimeSpan.Zero)
+            {
+                Task t = this.Clone();
+                t.date += cycle;
+                group.Add(t);
+            }
+            complete = true;
+        }
         public void Uncomplete() { complete = false; }
         public static Boolean operator >(Task a, Task b) {return a.priority > b.priority;}
         public static Boolean operator <(Task a,Task b){ return a.priority < b.priority; }
@@ -96,5 +125,6 @@ namespace Organizer
         {
             childr.Remove(t);
         }
+        
     }
 }

@@ -14,5 +14,17 @@ namespace Organizer
         private String name;
         private Color color;
         private Image background;
+        public void Add(Task t)
+        {
+            if (!tasks.Contains(t))
+            {
+                tasks.Add(t);
+            }
+        }
+        public void Remove(Task t)
+        {
+            tasks.Remove(t);
+        }
+        
     }
 }
