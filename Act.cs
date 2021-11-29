@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer
 {
-    class Task:Act
+    abstract class Act
     {
         private Group group;
         private TimeSpan cycle;
@@ -15,10 +15,8 @@ namespace Organizer
         private String name;
         private String description;
         private List<String> tags = new List<String>();
-        private int priority;
-        private List<Task> childr = new List<Task>();
         private Boolean complete;
-        public Task()
+        public Act()
         {
             date = new DateTime(0);
             cycle = new TimeSpan(0);
@@ -27,24 +25,10 @@ namespace Organizer
             description = "";
             complete = false;
         }
-        public Task(Task parent)
-        {
-            this.group = parent.group;
-            this.name = parent.name;
-            this.description = parent.description;
-            this.priority = parent.priority;
-            this.tags = parent.tags;
-            this.date = parent.date;
-            this.cycle = parent.cycle;
-            foreach (Task kid in childr)
-            {
-                this.childr.Add(new Task(kid));
-            }
-        }
         public TimeSpan Cycle
         {
             get { return cycle; }
-            set 
+            set
             {
                 if (value.TotalMinutes < 0)
                 {
@@ -64,14 +48,16 @@ namespace Organizer
         public String Name
         {
             get { return name; }
-            set 
+            set
             {
-                if (value.Length == 0) {
+                if (value.Length == 0)
+                {
                     throw new Exception("Имя не должно быть пустым");
-                } 
+                }
             }
         }
-        public String Description {
+        public String Description
+        {
             get { return description; }
             set { description = value; }
         }
@@ -98,29 +84,6 @@ namespace Organizer
                 throw new Exception("Заданного тега не существует");
             }
         }
-        public void Complete() {
-            if(cycle != TimeSpan.Zero)
-            {
-                Task t = new Task(this);
-                t.date += cycle;
-                group.Add(t);
-            }
-            complete = true;
-        }
         public void Uncomplete() { complete = false; }
-        public static Boolean operator >(Task a, Task b) {return a.priority > b.priority;}
-        public static Boolean operator <(Task a,Task b){ return a.priority < b.priority; }
-        public void AddKid(Task t)
-        {
-            if (!childr.Contains(t))
-            {
-                childr.Add(t);
-            }
-        }
-        public void RemKid(Task t)
-        {
-            childr.Remove(t);
-        }
-
     }
 }
