@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer
 {
-    class Task:Act
+    class Task
     {
         private Group group;
         private TimeSpan cycle;
@@ -22,24 +22,39 @@ namespace Organizer
         {
             date = new DateTime(0);
             cycle = new TimeSpan(0);
-            enddate = new DateTime(0);
             name = "";
             description = "";
             complete = false;
         }
         public Task(Task parent)
         {
-            this.group = parent.group;
-            this.name = parent.name;
-            this.description = parent.description;
-            this.priority = parent.priority;
-            this.tags = parent.tags;
-            this.date = parent.date;
-            this.cycle = parent.cycle;
+            date = new DateTime(0);
+            cycle = TimeSpan.Zero;
+            name = "";
+            description = "";
+            complete = false;
+            parent.AddKid(this);
+        }
+        public DateTime End
+        {
+            get { return enddate; }
+            set { enddate = value; }
+        }
+        public Task Clone()
+        {
+            Task t = new Task();
+            t.group = group;
+            t.name = name;
+            t.description = description;
+            t.priority = priority;
+            t.tags = tags;
+            t.date = date;
+            t.cycle = cycle;
             foreach (Task kid in childr)
             {
-                this.childr.Add(new Task(kid));
+                t.childr.Add(kid.Clone());
             }
+            return t;
         }
         public TimeSpan Cycle
         {
@@ -79,11 +94,6 @@ namespace Organizer
         {
             get { return complete; }
         }
-        public DateTime End
-        {
-            get { return enddate; }
-            set { enddate = value; }
-        }
         public void AddTag(String tag)
         {
             if (tags.Contains(tag))
@@ -101,7 +111,7 @@ namespace Organizer
         public void Complete() {
             if(cycle != TimeSpan.Zero)
             {
-                Task t = new Task(this);
+                Task t = this.Clone();
                 t.date += cycle;
                 group.Add(t);
             }
@@ -121,6 +131,6 @@ namespace Organizer
         {
             childr.Remove(t);
         }
-
+        
     }
 }

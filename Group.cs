@@ -9,34 +9,23 @@ namespace Organizer
 {
     class Group
     {
-        private List<Act> acts;
+        private List<Task> tasks;
         private int priority;
         private String name;
         private Color color;
         private Image background;
-        public void Add(Act t)
+        public void Add(Task t)
         {
-            if (!acts.Contains(t))
+            if (!tasks.Contains(t))
             {
-                acts.Add(t);
+                tasks.Add(t);
             }
         }
-        public void Remove(Act t)
+        public void Remove(Task t)
         {
-            acts.Remove(t);
+            tasks.Remove(t);
         }
-        public int Priority
-        {
-            set { 
-                if (value < 0) 
-                {
-                    throw new Exception("Приоритет должен быть больше нуля");
-                }
-                priority = value;
-            }
-            get { return priority; }
-        }
-        public Color Color 
+        public Color Color
         {
             get { return color; }
             set { color = value; }
@@ -57,18 +46,17 @@ namespace Organizer
             get { return background; }
             set { background = value; }
         }
-        public Act[] GetTasks(DateTime date)
+        public Task[] GetTasks(DateTime date)
         {
-            List<Act> res = new List<Act>();
-            foreach (Act t in acts)
+            List<Task> res = new List<Task>();
+            foreach (Task t in tasks)
             {
-                if(t.End > date)
+                if (t.End > date)
                 {
                     res.Add(t);
                 }
             }
             return res.ToArray();
         }
-
     }
 }
