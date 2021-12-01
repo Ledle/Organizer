@@ -29,12 +29,9 @@ namespace Organizer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Tasks_button = new System.Windows.Forms.Button();
             this.Calendar_button = new System.Windows.Forms.Button();
             this.Notes_button = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // Tasks_button
@@ -67,10 +64,6 @@ namespace Organizer
             this.Notes_button.UseVisualStyleBackColor = true;
             this.Notes_button.Click += new System.EventHandler(this.Notes_button_Click);
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -82,7 +75,6 @@ namespace Organizer
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -92,7 +84,6 @@ namespace Organizer
         private System.Windows.Forms.Button Tasks_button;
         private System.Windows.Forms.Button Calendar_button;
         private System.Windows.Forms.Button Notes_button;
-        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

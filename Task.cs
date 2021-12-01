@@ -6,17 +6,10 @@ using System.Threading.Tasks;
 
 namespace Organizer
 {
-    class Task
+    class Task:Event
     {
-        private Group group;
-        private TimeSpan cycle;
-        private DateTime date;
-        private DateTime enddate;
-        private String name;
-        private String description;
-        private List<String> tags = new List<String>();
         private int priority;
-        private List<Task> childr = new List<Task>();
+        private List<Task> subtasks = new List<Task>();
         private Boolean complete;
         public Task()
         {
@@ -33,14 +26,9 @@ namespace Organizer
             name = "";
             description = "";
             complete = false;
-            parent.AddKid(this);
+            parent.AddSub(this);
         }
-        public DateTime End
-        {
-            get { return enddate; }
-            set { enddate = value; }
-        }
-        public Task Clone()
+        new public Task Clone()
         {
             Task t = new Task();
             t.group = group;
@@ -50,63 +38,15 @@ namespace Organizer
             t.tags = tags;
             t.date = date;
             t.cycle = cycle;
-            foreach (Task kid in childr)
+            foreach (Task kid in subtasks)
             {
-                t.childr.Add(kid.Clone());
+                t.subtasks.Add(kid.Clone());
             }
             return t;
-        }
-        public TimeSpan Cycle
-        {
-            get { return cycle; }
-            set 
-            {
-                if (value.TotalMinutes < 0)
-                {
-                    throw new Exception("Значение цикла должно быть больше нуля");
-                }
-                else
-                {
-                    cycle = value;
-                }
-            }
-        }
-        public DateTime Date
-        {
-            get { return date; }
-            set { date = value; }
-        }
-        public String Name
-        {
-            get { return name; }
-            set 
-            {
-                if (value.Length == 0) {
-                    throw new Exception("Имя не должно быть пустым");
-                } 
-            }
-        }
-        public String Description {
-            get { return description; }
-            set { description = value; }
         }
         public Boolean Completed
         {
             get { return complete; }
-        }
-        public void AddTag(String tag)
-        {
-            if (tags.Contains(tag))
-            {
-                tags.Add(tag);
-            }
-        }
-        public void DelTag(String tag)
-        {
-            if (!(tags.Remove(tag)))
-            {
-                throw new Exception("Заданного тега не существует");
-            }
         }
         public void Complete() {
             if(cycle != TimeSpan.Zero)
@@ -120,17 +60,16 @@ namespace Organizer
         public void Uncomplete() { complete = false; }
         public static Boolean operator >(Task a, Task b) {return a.priority > b.priority;}
         public static Boolean operator <(Task a,Task b){ return a.priority < b.priority; }
-        public void AddKid(Task t)
+        public void AddSub(Task t)
         {
-            if (!childr.Contains(t))
+            if (!subtasks.Contains(t))
             {
-                childr.Add(t);
+                subtasks.Add(t);
             }
         }
-        public void RemKid(Task t)
+        public void RemSub(Task t)
         {
-            childr.Remove(t);
+            subtasks.Remove(t);
         }
-        
     }
 }
