@@ -19,6 +19,14 @@ namespace Organizer
             description = "";
             complete = false;
         }
+        public Task(String name)
+        {
+            date = new DateTime(0);
+            cycle = new TimeSpan(0);
+            this.name = name;
+            description = "";
+            complete = false;
+        }
         public Task(Task parent)
         {
             date = new DateTime(0);
@@ -49,13 +57,16 @@ namespace Organizer
             get { return complete; }
         }
         public void Complete() {
-            if(cycle != TimeSpan.Zero)
+            if (complete != true)
             {
-                Task t = this.Clone();
-                t.date += cycle;
-                group.Add(t);
+                if (cycle != TimeSpan.Zero)
+                {
+                    Task t = this.Clone();
+                    t.date += cycle;
+                    group.Add(t);
+                }
+                complete = true;
             }
-            complete = true;
         }
         public void Uncomplete() { complete = false; }
         public static Boolean operator >(Task a, Task b) {return a.priority > b.priority;}
