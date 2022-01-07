@@ -74,6 +74,7 @@ namespace Organizer
                 {
                     throw new Exception("Имя не должно быть пустым");
                 }
+                name = value;
             }
         }
         public String Description
@@ -93,6 +94,18 @@ namespace Organizer
             if (!(tags.Remove(tag)))
             {
                 throw new Exception("Заданного тега не существует");
+            }
+        }
+        public Group Group
+        {
+            get { return group; }
+            set {
+                if (group != value)
+                {
+                    if (group != null) { group.Remove(this); }
+                    group = value;
+                    
+                }
             }
         }
     }
