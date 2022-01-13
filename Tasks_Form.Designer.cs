@@ -42,6 +42,7 @@ namespace Organizer
             this.TaskNotes_Textbox = new System.Windows.Forms.TextBox();
             this.SubTasks = new System.Windows.Forms.CheckedListBox();
             this.Complete_Box = new System.Windows.Forms.CheckBox();
+            this.RemindDate_Picker1 = new System.Windows.Forms.DateTimePicker();
             this.NameTask_TextBox = new System.Windows.Forms.TextBox();
             this.AddTask_Button = new System.Windows.Forms.Button();
             this.AddButtons_Panel = new System.Windows.Forms.Panel();
@@ -50,10 +51,13 @@ namespace Organizer
             this.Remind1_Button = new System.Windows.Forms.Button();
             this.CompleteDate1_Button = new System.Windows.Forms.Button();
             this.Add_Panel = new System.Windows.Forms.Panel();
+            this.CompleteDate_Picker1 = new System.Windows.Forms.DateTimePicker();
             this.Groups_GridView = new System.Windows.Forms.DataGridView();
             this.Groups_Column = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Tasks_GridView = new System.Windows.Forms.DataGridView();
             this.Tasks_Column = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.RemindDate_Picker = new System.Windows.Forms.DateTimePicker();
+            this.CompleteDate_Picker = new System.Windows.Forms.DateTimePicker();
             this.Modes_Panel.SuspendLayout();
             this.Task_Panel.SuspendLayout();
             this.AddButtons_Panel.SuspendLayout();
@@ -146,6 +150,7 @@ namespace Organizer
             this.Remind_Button.TabIndex = 6;
             this.Remind_Button.Text = "Напоминание";
             this.Remind_Button.UseVisualStyleBackColor = true;
+            this.Remind_Button.Click += new System.EventHandler(this.Remind_Button_Click);
             // 
             // CompleteDate_Button
             // 
@@ -155,6 +160,7 @@ namespace Organizer
             this.CompleteDate_Button.TabIndex = 5;
             this.CompleteDate_Button.Text = "Дата выполнения";
             this.CompleteDate_Button.UseVisualStyleBackColor = true;
+            this.CompleteDate_Button.Click += new System.EventHandler(this.CompleteDate_Button_Click);
             // 
             // TaskName_Textbox
             // 
@@ -194,12 +200,24 @@ namespace Organizer
             this.Complete_Box.UseVisualStyleBackColor = true;
             this.Complete_Box.CheckedChanged += new System.EventHandler(this.Complete_Box_CheckedChanged);
             // 
+            // RemindDate_Picker1
+            // 
+            this.RemindDate_Picker1.CustomFormat = "dd.MM.yyyy HH:mm";
+            this.RemindDate_Picker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.RemindDate_Picker1.Location = new System.Drawing.Point(119, 0);
+            this.RemindDate_Picker1.Name = "RemindDate_Picker1";
+            this.RemindDate_Picker1.Size = new System.Drawing.Size(148, 23);
+            this.RemindDate_Picker1.TabIndex = 12;
+            this.RemindDate_Picker1.Visible = false;
+            this.RemindDate_Picker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
             // NameTask_TextBox
             // 
             this.NameTask_TextBox.Location = new System.Drawing.Point(0, 0);
             this.NameTask_TextBox.Name = "NameTask_TextBox";
             this.NameTask_TextBox.Size = new System.Drawing.Size(267, 23);
             this.NameTask_TextBox.TabIndex = 8;
+            this.NameTask_TextBox.TextChanged += new System.EventHandler(this.NameTask_TextBox_TextChanged);
             // 
             // AddTask_Button
             // 
@@ -243,24 +261,28 @@ namespace Organizer
             // 
             // Remind1_Button
             // 
-            this.Remind1_Button.Location = new System.Drawing.Point(112, 0);
+            this.Remind1_Button.Location = new System.Drawing.Point(115, 0);
             this.Remind1_Button.Name = "Remind1_Button";
             this.Remind1_Button.Size = new System.Drawing.Size(106, 23);
             this.Remind1_Button.TabIndex = 9;
             this.Remind1_Button.Text = "Напоминание";
             this.Remind1_Button.UseVisualStyleBackColor = true;
+            this.Remind1_Button.Click += new System.EventHandler(this.Remind1_Button_Click);
             // 
             // CompleteDate1_Button
             // 
             this.CompleteDate1_Button.Location = new System.Drawing.Point(0, 0);
             this.CompleteDate1_Button.Name = "CompleteDate1_Button";
-            this.CompleteDate1_Button.Size = new System.Drawing.Size(116, 23);
+            this.CompleteDate1_Button.Size = new System.Drawing.Size(112, 23);
             this.CompleteDate1_Button.TabIndex = 11;
             this.CompleteDate1_Button.Text = "Дата выполнения";
             this.CompleteDate1_Button.UseVisualStyleBackColor = true;
+            this.CompleteDate1_Button.Click += new System.EventHandler(this.CompleteDate1_Button_Click);
             // 
             // Add_Panel
             // 
+            this.Add_Panel.Controls.Add(this.CompleteDate_Picker1);
+            this.Add_Panel.Controls.Add(this.RemindDate_Picker1);
             this.Add_Panel.Controls.Add(this.NameTask_TextBox);
             this.Add_Panel.Controls.Add(this.AddTask_Button);
             this.Add_Panel.Location = new System.Drawing.Point(234, 384);
@@ -268,6 +290,15 @@ namespace Organizer
             this.Add_Panel.Size = new System.Drawing.Size(347, 25);
             this.Add_Panel.TabIndex = 11;
             this.Add_Panel.Visible = false;
+            // 
+            // CompleteDate_Picker1
+            // 
+            this.CompleteDate_Picker1.CustomFormat = "dd.MM.yyyy";
+            this.CompleteDate_Picker1.Location = new System.Drawing.Point(0, 2);
+            this.CompleteDate_Picker1.Name = "CompleteDate_Picker1";
+            this.CompleteDate_Picker1.Size = new System.Drawing.Size(140, 23);
+            this.CompleteDate_Picker1.TabIndex = 13;
+            this.CompleteDate_Picker1.Visible = false;
             // 
             // Groups_GridView
             // 
@@ -320,18 +351,41 @@ namespace Organizer
             this.Tasks_Column.Name = "Tasks_Column";
             this.Tasks_Column.Width = 217;
             // 
+            // RemindDate_Picker
+            // 
+            this.RemindDate_Picker.CustomFormat = "dd.MM.yyyy HH:mm";
+            this.RemindDate_Picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.RemindDate_Picker.Location = new System.Drawing.Point(464, 285);
+            this.RemindDate_Picker.Name = "RemindDate_Picker";
+            this.RemindDate_Picker.Size = new System.Drawing.Size(148, 23);
+            this.RemindDate_Picker.TabIndex = 14;
+            this.RemindDate_Picker.Visible = false;
+            this.RemindDate_Picker.ValueChanged += new System.EventHandler(this.RemindDate_Picker_ValueChanged);
+            // 
+            // CompleteDate_Picker
+            // 
+            this.CompleteDate_Picker.CustomFormat = "dd.MM.yyyy";
+            this.CompleteDate_Picker.Location = new System.Drawing.Point(472, 256);
+            this.CompleteDate_Picker.Name = "CompleteDate_Picker";
+            this.CompleteDate_Picker.Size = new System.Drawing.Size(140, 23);
+            this.CompleteDate_Picker.TabIndex = 14;
+            this.CompleteDate_Picker.Visible = false;
+            this.CompleteDate_Picker.ValueChanged += new System.EventHandler(this.CompleteDate_Picker_ValueChanged);
+            // 
             // Tasks_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Tasks_GridView);
+            this.Controls.Add(this.CompleteDate_Picker);
+            this.Controls.Add(this.RemindDate_Picker);
             this.Controls.Add(this.Groups_GridView);
             this.Controls.Add(this.Add_Panel);
             this.Controls.Add(this.AddButtons_Panel);
             this.Controls.Add(this.Task_Panel);
             this.Controls.Add(this.Modes_Panel);
+            this.Controls.Add(this.Tasks_GridView);
             this.Name = "Tasks_Form";
             this.Text = "Задачи";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -375,6 +429,10 @@ namespace Organizer
         private System.Windows.Forms.DataGridViewButtonColumn Groups_Column;
         private System.Windows.Forms.DataGridView Tasks_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Tasks_Column;
+        private System.Windows.Forms.DateTimePicker RemindDate_Picker1;
+        private System.Windows.Forms.DateTimePicker CompleteDate_Picker1;
+        private System.Windows.Forms.DateTimePicker RemindDate_Picker;
+        private System.Windows.Forms.DateTimePicker CompleteDate_Picker;
     }
 }
 

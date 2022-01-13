@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Organizer
 {
+    [Serializable]
     class Group
     {
         private static List<Group> groups = new List<Group>();
@@ -36,11 +37,13 @@ namespace Organizer
             if (!tasks.Contains(t))
             {
                 tasks.Add(t);
+                t.Group = this;
             }
         }
         public void Remove(Event t)
         {
             tasks.Remove(t);
+            t.Group = null;
         }
         public Color Color
         {

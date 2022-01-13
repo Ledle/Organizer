@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer
 {
+    [Serializable]
     class Task:Event
     {
         private int priority;
@@ -51,6 +52,11 @@ namespace Organizer
                 t.subtasks.Add(kid.Clone());
             }
             return t;
+        }
+        public DateTime CompleteDate
+        {
+            get { return enddate; }
+            set { enddate = value; }
         }
         public Boolean Completed
         {

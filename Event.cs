@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer
 {
+    [Serializable]
     class Event
     {
         private protected Group group;
@@ -70,10 +71,6 @@ namespace Organizer
             get { return name; }
             set
             {
-                if (value.Length == 0)
-                {
-                    throw new Exception("Имя не должно быть пустым");
-                }
                 name = value;
             }
         }
@@ -102,9 +99,8 @@ namespace Organizer
             set {
                 if (group != value)
                 {
-                    if (group != null) { group.Remove(this); }
+                    if (group!=null&&group.Tasks.Contains(this)) { group.Remove(this); }
                     group = value;
-                    
                 }
             }
         }

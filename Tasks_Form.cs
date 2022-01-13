@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Organizer
 {
@@ -24,7 +26,16 @@ namespace Organizer
             tasks[0].Add(new Task("Сделать курсач"));
             tasks[1].Add(new Task("Cancel"));
             tasks[2].Add(new Task("OK"));
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fs = new FileStream("test3.bin", FileMode.OpenOrCreate);
+            formatter.Serialize(fs, Group.Groups);
+            fs.Close();
+            FileStream fl = new FileStream("test3.bin", FileMode.OpenOrCreate);
+            List<Group> grps = (List<Group>)formatter.Deserialize(fl);
+            fl.Close();
             Group.Show(Groups_GridView);
+            NameTask_TextBox_TextChanged(NameTask_TextBox, null);
+
         }
         private void Tasks_button_Click(object sender, EventArgs e)
         {
@@ -61,13 +72,17 @@ namespace Organizer
         {
             Group grp = Tasks_GridView.Tag as Group;
             Task t = new Task(NameTask_TextBox.Text);//Дописать
+            t.CompleteDate = CompleteDate_Picker1.Value;
             grp.Add(t);
             grp.ShowTasks(Tasks_GridView);
+            NameTask_TextBox.Text = "";
         }
 
         private void Groups_GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Task_Panel.Hide();
+            RemindDate_Picker.Hide();
+            CompleteDate_Picker.Hide();
             Tasks_GridView.Show();
             Add_Panel.Show();
             Group grp = (Group)Groups_GridView.Rows[e.RowIndex].Tag;
@@ -121,10 +136,64 @@ namespace Organizer
 
         private void Delete_Button_Click(object sender, EventArgs e)
         {
+            (sender as Button).Parent.Hide();
             Task t = (sender as Button).Parent.Tag as Task;
             Group grp = t.Group;
             grp.Remove(t);
             grp.ShowTasks(Tasks_GridView);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void NameTask_TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if((sender as TextBox).Text != "")
+            {
+                (sender as TextBox).Parent.Location = new Point(234, 384);
+                AddButtons_Panel.Show();
+            }
+            else
+            {
+                (sender as TextBox).Parent.Location = new Point(234, 412);
+                AddButtons_Panel.Hide();
+            }
+        }
+        private void CompleteDate1_Button_Click(object sender, EventArgs e)
+        {
+            CompleteDate_Picker1.Visible = !CompleteDate_Picker1.Visible;
+            RemindDate_Picker1.Hide();
+        }
+        private void Remind1_Button_Click(object sender, EventArgs e)
+        {
+            RemindDate_Picker1.Visible = !RemindDate_Picker1.Visible;
+            CompleteDate_Picker1.Hide();
+        }
+
+        private void CompleteDate_Button_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            Task t = b.Parent.Tag as Task;
+            CompleteDate_Picker.Value = t.CompleteDate; 
+            CompleteDate_Picker.Visible = !CompleteDate_Picker.Visible;
+            RemindDate_Picker.Hide();
+        }
+
+        private void Remind_Button_Click(object sender, EventArgs e)
+        {
+            RemindDate_Picker.Visible = !RemindDate_Picker.Visible;
+            CompleteDate_Picker.Hide();
+        }
+
+        private void CompleteDate_Picker_ValueChanged(object sender, EventArgs e)
+        {
+            (Task_Panel.Tag as Task).CompleteDate = CompleteDate_Picker.Value;
+        }
+
+        private void RemindDate_Picker_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
