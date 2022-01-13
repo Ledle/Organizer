@@ -17,17 +17,17 @@ namespace Organizer
         public Calendar()
         {
             InitializeComponent();
-            Month_GridView.RowTemplate.Height = Month_GridView.Height/5;
-            for (int i = 0; i < 5; i++)
+            Month_GridView.RowTemplate.Height = Month_GridView.Height/6;
+            for (int i = 0; i < 6; i++)
             {
                 Month_GridView.Rows.Add();
             }
-            Month_GridView.Height = Month_GridView.RowTemplate.Height * 5;
+            Month_GridView.Height = Month_GridView.RowTemplate.Height * 6;
             ChangeMonth();
         }
         private void ChangeMonth()
         {
-            MonthName_Box.Text = months[date.Month - 1];
+            MonthName_Box.Text = Convert.ToString(date.Year) +" "+ months[date.Month - 1];
             int firstdate=-1;
             DateTime d = new DateTime(date.Year, date.Month, 1);
             switch (d.DayOfWeek)
@@ -55,14 +55,62 @@ namespace Organizer
                     break;
             }
             Month_GridView.Rows[0].Cells[firstdate].Value = 1;
+            Month_GridView.Rows[0].Cells[firstdate].Tag = new DateTime(date.Year, date.Month, 1);
             for (int i = 0;i<firstdate ;i++)
             {
-                Month_GridView.Rows[0].Cells[firstdate - (i+1)].Value = DateTime.DaysInMonth(date.Year, date.Month)-i;
+                Month_GridView.Rows[0].Cells[firstdate - (i+1)].Value = DateTime.DaysInMonth(date.Year, date.Month == 1 ? 12:date.Month-1)-i;
+                Month_GridView.Rows[0].Cells[firstdate - (i+1)].Tag = new DateTime(date.Year, date.Month == 1 ? 12 : date.Month - 1, DateTime.DaysInMonth(date.Year, date.Month == 1 ? 12 : date.Month - 1) - i);//исправить
             }
             for (int i = 1; i < 7-firstdate; i++)
             {
                 Month_GridView.Rows[0].Cells[firstdate + i].Value = i + 1;
+                Month_GridView.Rows[0].Cells[firstdate + i].Tag = new DateTime(date.Year, date.Month, i + 1);
             }
+            int n = 8 - firstdate;
+            int m = date.Month;
+            for (int i = 1; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    d = (m == 13) ? new DateTime(date.Year + 1, 1, n):new DateTime(date.Year,m,n);
+                    Month_GridView.Rows[i].Cells[j].Value = n++;
+                    Month_GridView.Rows[i].Cells[j].Tag = d; 
+                    if (n > DateTime.DaysInMonth(date.Year, date.Month)) { n = 1;m++; }
+                }
+            }
+
+        }
+
+        private void Back_Button_Click(object sender, EventArgs e)
+        {
+            if (date.Month == 1)
+            {
+                date = new DateTime(date.Year - 1, 12, 31);
+            }
+            else
+            {
+                date = new DateTime(date.Year,date.Month - 1, DateTime.DaysInMonth(date.Year,date.Month-1));
+            }
+            ChangeMonth();
+        }
+
+        private void Forward_Button_Click(object sender, EventArgs e)
+        {
+            if (date.Month == 12)
+            {
+                date = new DateTime(date.Year + 1, 1, 1);
+            }
+            else
+            {
+                date = new DateTime(date.Year, date.Month + 1, 1);
+            }
+            ChangeMonth();
+        }
+
+        private void Month_GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DateTime d = (DateTime)Month_GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+            textBox1.Text = d.Year + "." + d.Month + "." + d.Day;
         }
     }
 }

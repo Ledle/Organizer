@@ -40,6 +40,7 @@ namespace Organizer
             this.Back_Button = new System.Windows.Forms.Button();
             this.Forward_Button = new System.Windows.Forms.Button();
             this.MonthName_Box = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Month_GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@ namespace Organizer
             this.Month_GridView.RowTemplate.Height = 50;
             this.Month_GridView.Size = new System.Drawing.Size(683, 382);
             this.Month_GridView.TabIndex = 0;
+            this.Month_GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Month_GridView_CellContentClick);
             // 
             // Monday
             // 
@@ -116,12 +118,13 @@ namespace Organizer
             // 
             // Back_Button
             // 
-            this.Back_Button.Location = new System.Drawing.Point(213, 0);
+            this.Back_Button.Location = new System.Drawing.Point(165, 0);
             this.Back_Button.Name = "Back_Button";
             this.Back_Button.Size = new System.Drawing.Size(75, 23);
             this.Back_Button.TabIndex = 1;
             this.Back_Button.Text = "<";
             this.Back_Button.UseVisualStyleBackColor = true;
+            this.Back_Button.Click += new System.EventHandler(this.Back_Button_Click);
             // 
             // Forward_Button
             // 
@@ -132,22 +135,35 @@ namespace Organizer
             this.Forward_Button.TabIndex = 2;
             this.Forward_Button.Text = ">";
             this.Forward_Button.UseVisualStyleBackColor = true;
+            this.Forward_Button.Click += new System.EventHandler(this.Forward_Button_Click);
             // 
             // MonthName_Box
             // 
             this.MonthName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MonthName_Box.Location = new System.Drawing.Point(294, 0);
+            this.MonthName_Box.Location = new System.Drawing.Point(246, 0);
             this.MonthName_Box.Name = "MonthName_Box";
             this.MonthName_Box.ReadOnly = true;
-            this.MonthName_Box.Size = new System.Drawing.Size(100, 23);
+            this.MonthName_Box.Size = new System.Drawing.Size(148, 23);
             this.MonthName_Box.TabIndex = 3;
             this.MonthName_Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(509, 1);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(148, 23);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.MonthName_Box);
             this.Controls.Add(this.Forward_Button);
             this.Controls.Add(this.Back_Button);
@@ -173,5 +189,6 @@ namespace Organizer
         private System.Windows.Forms.Button Back_Button;
         private System.Windows.Forms.Button Forward_Button;
         private System.Windows.Forms.TextBox MonthName_Box;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
