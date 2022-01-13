@@ -17,23 +17,10 @@ namespace Organizer
         public Tasks_Form()
         {
             InitializeComponent();
-            Task t;
             Tasks_GridView.Columns[0].Width = Tasks_GridView.Width;
-            Group[] tasks = new Group[3];
-            tasks[0] = new Group("Дом");
-            tasks[1] = new Group("Матан");
-            tasks[2] = new Group("Курсач");
-            tasks[0].Add(new Task("Сделать курсач"));
-            tasks[1].Add(new Task("Cancel"));
-            tasks[2].Add(new Task("OK"));
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream fs = new FileStream("test3.bin", FileMode.OpenOrCreate);
-            formatter.Serialize(fs, Group.Groups);
-            fs.Close();
-            FileStream fl = new FileStream("test3.bin", FileMode.OpenOrCreate);
-            List<Group> grps = (List<Group>)formatter.Deserialize(fl);
-            fl.Close();
-            Group.Show(Groups_GridView);
+            Saver.Directory = "test.bin";
+            TaskGroup.Load();
+            TaskGroup.Show(Groups_GridView);
             NameTask_TextBox_TextChanged(NameTask_TextBox, null);
 
         }
@@ -151,12 +138,13 @@ namespace Organizer
         {
             if((sender as TextBox).Text != "")
             {
-                (sender as TextBox).Parent.Location = new Point(234, 384);
+                (sender as TextBox).Parent.Location = new Point(234, AddButtons_Panel.Location.Y - 28);
                 AddButtons_Panel.Show();
             }
             else
             {
-                (sender as TextBox).Parent.Location = new Point(234, 412);
+                Control p = (sender as TextBox).Parent;
+                p.Location = new Point(234, AddButtons_Panel.Location.Y);
                 AddButtons_Panel.Hide();
             }
         }
@@ -194,6 +182,11 @@ namespace Organizer
         private void RemindDate_Picker_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            TaskGroup.Save();
         }
     }
 }

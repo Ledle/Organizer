@@ -8,29 +8,22 @@ using System.Drawing;
 namespace Organizer
 {
     [Serializable]
-    class Group
+    abstract class Group
     {
-        private static List<Group> groups = new List<Group>();
-        private List<Event> tasks = new List<Event>();
-        private int priority;
-        private String name;
-        private Color color;
-        private Image background;
+        protected List<Event> tasks = new List<Event>();
+        protected int priority;
+        protected String name;
+        protected Color color;
+        protected Image background;
         public Group()
         {
-            groups.Add(this);
             priority = 0;
             name = "";
         }
         public Group(String name)
         {
-            groups.Add(this);
             priority = 0;
             this.name = name;
-        }
-        public static List<Group> Groups
-        {
-            get { return new List<Group>(groups); }
         }
         public void Add(Task t)
         {
@@ -82,17 +75,6 @@ namespace Organizer
         public List<Event> Tasks
         {
             get { return tasks; }
-        }
-        public static void Show(System.Windows.Forms.DataGridView gridView)
-        {
-            Group grp;
-            gridView.Rows.Clear();
-            for (int i = 0; i < Group.Groups.Count; i++)
-            {
-                grp = Group.Groups[i];
-                gridView.Rows.Add(grp.Name);
-                gridView.Rows[i].Tag = grp;
-            }
         }
         public void ShowTasks(System.Windows.Forms.DataGridView gridView)
         {
