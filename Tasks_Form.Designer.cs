@@ -182,9 +182,7 @@ namespace Organizer
             this.RemindDate_Picker1.Name = "RemindDate_Picker1";
             this.RemindDate_Picker1.Size = new System.Drawing.Size(148, 23);
             this.RemindDate_Picker1.TabIndex = 12;
-            this.RemindDate_Picker1.Visible = false;
-            this.RemindDate_Picker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
+            this.RemindDate_Picker1.Visible = false;            // 
             // NameTask_TextBox
             // 
             this.NameTask_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -324,7 +322,6 @@ namespace Organizer
             this.RemindDate_Picker.Size = new System.Drawing.Size(148, 23);
             this.RemindDate_Picker.TabIndex = 14;
             this.RemindDate_Picker.Visible = false;
-            this.RemindDate_Picker.ValueChanged += new System.EventHandler(this.RemindDate_Picker_ValueChanged);
             // 
             // CompleteDate_Picker
             // 
@@ -400,7 +397,6 @@ namespace Organizer
             this.Controls.Add(this.Tasks_GridView);
             this.Name = "Tasks_Form";
             this.Text = "Задачи";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Task_Panel.ResumeLayout(false);
             this.Task_Panel.PerformLayout();
             this.AddButtons_Panel.ResumeLayout(false);

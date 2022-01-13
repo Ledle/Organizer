@@ -23,36 +23,6 @@ namespace Organizer
             NameTask_TextBox_TextChanged(NameTask_TextBox, null);
 
         }
-        private void Tasks_button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Calendar_button_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void Notes_button_Click(object sender, EventArgs e)
-        {
-        }
 
         private void AddTask_Button_Click(object sender, EventArgs e)
         {
@@ -128,11 +98,6 @@ namespace Organizer
             grp.Remove(t);
             grp.ShowTasks(Tasks_GridView);
         }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
         private void NameTask_TextBox_TextChanged(object sender, EventArgs e)
         {
             if((sender as TextBox).Text != "")
@@ -177,12 +142,6 @@ namespace Organizer
         {
             (Task_Panel.Tag as Task).CompleteDate = CompleteDate_Picker.Value;
         }
-
-        private void RemindDate_Picker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Save_Click(object sender, EventArgs e)
         {
             TaskGroup.Save();

@@ -30,7 +30,7 @@
         {
             this.Groups_GridView = new System.Windows.Forms.DataGridView();
             this.Groups_Column = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Tasks_GridView = new System.Windows.Forms.DataGridView();
+            this.Events_GridView = new System.Windows.Forms.DataGridView();
             this.Tasks_Column = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Task_Panel = new System.Windows.Forms.Panel();
             this.Save = new System.Windows.Forms.Button();
@@ -45,15 +45,16 @@
             this.CompleteDate_Picker1 = new System.Windows.Forms.DateTimePicker();
             this.RemindDate_Picker1 = new System.Windows.Forms.DateTimePicker();
             this.NameTask_TextBox = new System.Windows.Forms.TextBox();
-            this.AddTask_Button = new System.Windows.Forms.Button();
             this.AddButtons_Panel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.Cycle1_Button = new System.Windows.Forms.Button();
             this.Remind1_Button = new System.Windows.Forms.Button();
             this.CompleteDate1_Button = new System.Windows.Forms.Button();
-            this.calendar1 = new Organizer.Calendar();
+            this.MonthCalendar = new Organizer.Calendar();
+            this.AddGroup_Button = new System.Windows.Forms.Button();
+            this.GroupName_Box = new System.Windows.Forms.TextBox();
+            this.Save_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Groups_GridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Tasks_GridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Events_GridView)).BeginInit();
             this.Task_Panel.SuspendLayout();
             this.Add_Panel.SuspendLayout();
             this.AddButtons_Panel.SuspendLayout();
@@ -75,8 +76,9 @@
             this.Groups_GridView.Name = "Groups_GridView";
             this.Groups_GridView.RowHeadersVisible = false;
             this.Groups_GridView.RowTemplate.Height = 25;
-            this.Groups_GridView.Size = new System.Drawing.Size(220, 483);
+            this.Groups_GridView.Size = new System.Drawing.Size(233, 455);
             this.Groups_GridView.TabIndex = 2;
+            this.Groups_GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Groups_GridView_CellContentClick);
             // 
             // Groups_Column
             // 
@@ -84,27 +86,27 @@
             this.Groups_Column.Name = "Groups_Column";
             this.Groups_Column.Width = 217;
             // 
-            // Tasks_GridView
+            // Events_GridView
             // 
-            this.Tasks_GridView.AllowUserToAddRows = false;
-            this.Tasks_GridView.AllowUserToOrderColumns = true;
-            this.Tasks_GridView.AllowUserToResizeColumns = false;
-            this.Tasks_GridView.AllowUserToResizeRows = false;
-            this.Tasks_GridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Events_GridView.AllowUserToAddRows = false;
+            this.Events_GridView.AllowUserToOrderColumns = true;
+            this.Events_GridView.AllowUserToResizeColumns = false;
+            this.Events_GridView.AllowUserToResizeRows = false;
+            this.Events_GridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tasks_GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Tasks_GridView.ColumnHeadersVisible = false;
-            this.Tasks_GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Events_GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Events_GridView.ColumnHeadersVisible = false;
+            this.Events_GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tasks_Column});
-            this.Tasks_GridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.Tasks_GridView.Location = new System.Drawing.Point(873, 0);
-            this.Tasks_GridView.Name = "Tasks_GridView";
-            this.Tasks_GridView.RowHeadersVisible = false;
-            this.Tasks_GridView.RowTemplate.Height = 25;
-            this.Tasks_GridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.Tasks_GridView.Size = new System.Drawing.Size(211, 199);
-            this.Tasks_GridView.TabIndex = 13;
-            this.Tasks_GridView.Visible = false;
+            this.Events_GridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.Events_GridView.Location = new System.Drawing.Point(873, 0);
+            this.Events_GridView.Name = "Events_GridView";
+            this.Events_GridView.RowHeadersVisible = false;
+            this.Events_GridView.RowTemplate.Height = 25;
+            this.Events_GridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.Events_GridView.Size = new System.Drawing.Size(211, 199);
+            this.Events_GridView.TabIndex = 13;
+            this.Events_GridView.Visible = false;
             // 
             // Tasks_Column
             // 
@@ -116,6 +118,7 @@
             // 
             this.Task_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Task_Panel.Controls.Add(this.Save_Button);
             this.Task_Panel.Controls.Add(this.Save);
             this.Task_Panel.Controls.Add(this.Delete_Button);
             this.Task_Panel.Controls.Add(this.Cycle_Button);
@@ -126,14 +129,14 @@
             this.Task_Panel.Controls.Add(this.Complete_Box);
             this.Task_Panel.Location = new System.Drawing.Point(873, 198);
             this.Task_Panel.Name = "Task_Panel";
-            this.Task_Panel.Size = new System.Drawing.Size(211, 285);
+            this.Task_Panel.Size = new System.Drawing.Size(211, 288);
             this.Task_Panel.TabIndex = 14;
             this.Task_Panel.Visible = false;
             // 
             // Save
             // 
             this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Save.Location = new System.Drawing.Point(134, 566);
+            this.Save.Location = new System.Drawing.Point(134, 569);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 9;
@@ -143,7 +146,7 @@
             // Delete_Button
             // 
             this.Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Delete_Button.Location = new System.Drawing.Point(148, 603);
+            this.Delete_Button.Location = new System.Drawing.Point(148, 606);
             this.Delete_Button.Name = "Delete_Button";
             this.Delete_Button.Size = new System.Drawing.Size(61, 23);
             this.Delete_Button.TabIndex = 8;
@@ -209,7 +212,6 @@
             this.Add_Panel.Controls.Add(this.CompleteDate_Picker1);
             this.Add_Panel.Controls.Add(this.RemindDate_Picker1);
             this.Add_Panel.Controls.Add(this.NameTask_TextBox);
-            this.Add_Panel.Controls.Add(this.AddTask_Button);
             this.Add_Panel.Location = new System.Drawing.Point(240, 432);
             this.Add_Panel.Name = "Add_Panel";
             this.Add_Panel.Size = new System.Drawing.Size(627, 25);
@@ -248,21 +250,10 @@
             this.NameTask_TextBox.Size = new System.Drawing.Size(694, 23);
             this.NameTask_TextBox.TabIndex = 8;
             // 
-            // AddTask_Button
-            // 
-            this.AddTask_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddTask_Button.Location = new System.Drawing.Point(699, 0);
-            this.AddTask_Button.Name = "AddTask_Button";
-            this.AddTask_Button.Size = new System.Drawing.Size(75, 23);
-            this.AddTask_Button.TabIndex = 9;
-            this.AddTask_Button.Text = "Добавить";
-            this.AddTask_Button.UseVisualStyleBackColor = true;
-            // 
             // AddButtons_Panel
             // 
             this.AddButtons_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddButtons_Panel.Controls.Add(this.button1);
             this.AddButtons_Panel.Controls.Add(this.Cycle1_Button);
             this.AddButtons_Panel.Controls.Add(this.Remind1_Button);
             this.AddButtons_Panel.Controls.Add(this.CompleteDate1_Button);
@@ -271,16 +262,6 @@
             this.AddButtons_Panel.Size = new System.Drawing.Size(627, 26);
             this.AddButtons_Panel.TabIndex = 15;
             this.AddButtons_Panel.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(713, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Удалить";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Cycle1_Button
             // 
@@ -309,12 +290,43 @@
             this.CompleteDate1_Button.Text = "Дата выполнения";
             this.CompleteDate1_Button.UseVisualStyleBackColor = true;
             // 
-            // calendar1
+            // MonthCalendar
             // 
-            this.calendar1.Location = new System.Drawing.Point(216, 0);
-            this.calendar1.Name = "calendar1";
-            this.calendar1.Size = new System.Drawing.Size(651, 435);
-            this.calendar1.TabIndex = 17;
+            this.MonthCalendar.Location = new System.Drawing.Point(239, 1);
+            this.MonthCalendar.Name = "MonthCalendar";
+            this.MonthCalendar.Size = new System.Drawing.Size(628, 435);
+            this.MonthCalendar.TabIndex = 17;
+            // 
+            // AddGroup_Button
+            // 
+            this.AddGroup_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddGroup_Button.Location = new System.Drawing.Point(162, 463);
+            this.AddGroup_Button.Name = "AddGroup_Button";
+            this.AddGroup_Button.Size = new System.Drawing.Size(72, 23);
+            this.AddGroup_Button.TabIndex = 18;
+            this.AddGroup_Button.Text = "Добавить";
+            this.AddGroup_Button.UseVisualStyleBackColor = true;
+            this.AddGroup_Button.Click += new System.EventHandler(this.AddGroup_Button_Click);
+            // 
+            // GroupName_Box
+            // 
+            this.GroupName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupName_Box.Location = new System.Drawing.Point(0, 463);
+            this.GroupName_Box.Name = "GroupName_Box";
+            this.GroupName_Box.Size = new System.Drawing.Size(156, 23);
+            this.GroupName_Box.TabIndex = 19;
+            // 
+            // Save_Button
+            // 
+            this.Save_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Save_Button.Location = new System.Drawing.Point(80, 247);
+            this.Save_Button.Name = "Save_Button";
+            this.Save_Button.Size = new System.Drawing.Size(75, 23);
+            this.Save_Button.TabIndex = 20;
+            this.Save_Button.Text = "Save";
+            this.Save_Button.UseVisualStyleBackColor = true;
+            this.Save_Button.Click += new System.EventHandler(this.Save_Button_Click);
             // 
             // Calendar_Form
             // 
@@ -322,23 +334,26 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1083, 490);
-            this.Controls.Add(this.calendar1);
+            this.Controls.Add(this.AddGroup_Button);
+            this.Controls.Add(this.GroupName_Box);
+            this.Controls.Add(this.MonthCalendar);
             this.Controls.Add(this.Add_Panel);
             this.Controls.Add(this.AddButtons_Panel);
             this.Controls.Add(this.Groups_GridView);
             this.Controls.Add(this.Task_Panel);
-            this.Controls.Add(this.Tasks_GridView);
+            this.Controls.Add(this.Events_GridView);
             this.MinimumSize = new System.Drawing.Size(1099, 529);
             this.Name = "Calendar_Form";
             this.Text = "Calendar_Form";
             ((System.ComponentModel.ISupportInitialize)(this.Groups_GridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Tasks_GridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Events_GridView)).EndInit();
             this.Task_Panel.ResumeLayout(false);
             this.Task_Panel.PerformLayout();
             this.Add_Panel.ResumeLayout(false);
             this.Add_Panel.PerformLayout();
             this.AddButtons_Panel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -346,7 +361,7 @@
 
         private System.Windows.Forms.DataGridView Groups_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Groups_Column;
-        private System.Windows.Forms.DataGridView Tasks_GridView;
+        private System.Windows.Forms.DataGridView Events_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Tasks_Column;
         private System.Windows.Forms.Panel Task_Panel;
         private System.Windows.Forms.Button Save;
@@ -361,12 +376,13 @@
         private System.Windows.Forms.DateTimePicker CompleteDate_Picker1;
         private System.Windows.Forms.DateTimePicker RemindDate_Picker1;
         private System.Windows.Forms.TextBox NameTask_TextBox;
-        private System.Windows.Forms.Button AddTask_Button;
         private System.Windows.Forms.Panel AddButtons_Panel;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Cycle1_Button;
         private System.Windows.Forms.Button Remind1_Button;
         private System.Windows.Forms.Button CompleteDate1_Button;
-        private Calendar calendar1;
+        private Calendar MonthCalendar;
+        private System.Windows.Forms.Button AddGroup_Button;
+        private System.Windows.Forms.TextBox GroupName_Box;
+        private System.Windows.Forms.Button Save_Button;
     }
 }

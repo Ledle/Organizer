@@ -12,6 +12,9 @@ namespace Organizer
 {
     public partial class Calendar : UserControl
     {
+        public delegate void SelectHandler(DateTime d);
+        public event SelectHandler? SelectDay;
+        private DateTime selecteddate = DateTime.Now;
         private DateTime date = DateTime.Now;
         private String[] months = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
         public Calendar()
@@ -109,8 +112,13 @@ namespace Organizer
 
         private void Month_GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DateTime d = (DateTime)Month_GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
-            textBox1.Text = d.Year + "." + d.Month + "." + d.Day;
+            selecteddate = (DateTime)Month_GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+            SelectDay.Invoke(selecteddate);
+            
+        }
+        public DateTime SelectedDate
+        {
+            get { return selecteddate; }
         }
     }
 }

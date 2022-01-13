@@ -40,7 +40,6 @@ namespace Organizer
             this.Back_Button = new System.Windows.Forms.Button();
             this.Forward_Button = new System.Windows.Forms.Button();
             this.MonthName_Box = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Month_GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,22 +147,10 @@ namespace Organizer
             this.MonthName_Box.TabIndex = 3;
             this.MonthName_Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(509, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(148, 23);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.MonthName_Box);
             this.Controls.Add(this.Forward_Button);
             this.Controls.Add(this.Back_Button);
@@ -189,6 +176,5 @@ namespace Organizer
         private System.Windows.Forms.Button Back_Button;
         private System.Windows.Forms.Button Forward_Button;
         private System.Windows.Forms.TextBox MonthName_Box;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
