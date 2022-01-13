@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Organizer
 {
@@ -15,6 +17,7 @@ namespace Organizer
         protected String name;
         protected Color color;
         protected Image background;
+        protected static BinaryFormatter formatter = new BinaryFormatter();
         public Group()
         {
             priority = 0;

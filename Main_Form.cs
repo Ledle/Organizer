@@ -13,6 +13,7 @@ namespace Organizer
 
     public partial class Main_Form : Form
     {
+
         Tasks_Form ft = new Tasks_Form();
         public Main_Form()
         {

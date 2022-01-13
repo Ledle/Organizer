@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Organizer
 {
@@ -33,11 +35,17 @@ namespace Organizer
         }
         public static void Save()
         {
-            Saver.Save(groups);
+            String dir = "Tasks.bin";
+            FileStream fs = new FileStream(dir, FileMode.OpenOrCreate);
+            formatter.Serialize(fs, groups);
+            fs.Close();
         }
         public static void Load()
         {
-            groups = Saver.Load();
+            String dir = "Tasks.bin";
+            FileStream fl = new FileStream(dir, FileMode.OpenOrCreate);
+            groups = (List<Group>)formatter.Deserialize(fl);
+            fl.Close();
         }
     }
 }

@@ -55,6 +55,8 @@ namespace Organizer
             this.CompleteDate_Picker = new System.Windows.Forms.DateTimePicker();
             this.Groups_Column = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Groups_GridView = new System.Windows.Forms.DataGridView();
+            this.GroupName_Box = new System.Windows.Forms.TextBox();
+            this.AddGroup_Button = new System.Windows.Forms.Button();
             this.Task_Panel.SuspendLayout();
             this.AddButtons_Panel.SuspendLayout();
             this.Add_Panel.SuspendLayout();
@@ -357,9 +359,29 @@ namespace Organizer
             this.Groups_GridView.Name = "Groups_GridView";
             this.Groups_GridView.RowHeadersVisible = false;
             this.Groups_GridView.RowTemplate.Height = 25;
-            this.Groups_GridView.Size = new System.Drawing.Size(220, 443);
+            this.Groups_GridView.Size = new System.Drawing.Size(220, 409);
             this.Groups_GridView.TabIndex = 1;
             this.Groups_GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Groups_GridView_CellContentClick);
+            // 
+            // GroupName_Box
+            // 
+            this.GroupName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupName_Box.Location = new System.Drawing.Point(1, 420);
+            this.GroupName_Box.Name = "GroupName_Box";
+            this.GroupName_Box.Size = new System.Drawing.Size(142, 23);
+            this.GroupName_Box.TabIndex = 14;
+            // 
+            // AddGroup_Button
+            // 
+            this.AddGroup_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddGroup_Button.Location = new System.Drawing.Point(149, 420);
+            this.AddGroup_Button.Name = "AddGroup_Button";
+            this.AddGroup_Button.Size = new System.Drawing.Size(72, 23);
+            this.AddGroup_Button.TabIndex = 14;
+            this.AddGroup_Button.Text = "Добавить";
+            this.AddGroup_Button.UseVisualStyleBackColor = true;
+            this.AddGroup_Button.Click += new System.EventHandler(this.AddGroup_Button_Click);
             // 
             // Tasks_Form
             // 
@@ -367,6 +389,8 @@ namespace Organizer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AddGroup_Button);
+            this.Controls.Add(this.GroupName_Box);
             this.Controls.Add(this.CompleteDate_Picker);
             this.Controls.Add(this.RemindDate_Picker);
             this.Controls.Add(this.Groups_GridView);
@@ -385,6 +409,7 @@ namespace Organizer
             ((System.ComponentModel.ISupportInitialize)(this.Tasks_GridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Groups_GridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -416,6 +441,8 @@ namespace Organizer
         private System.Windows.Forms.DataGridViewButtonColumn Groups_Column;
         private System.Windows.Forms.DataGridView Groups_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Tasks_Column;
+        private System.Windows.Forms.TextBox GroupName_Box;
+        private System.Windows.Forms.Button AddGroup_Button;
     }
 }
 

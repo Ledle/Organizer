@@ -18,7 +18,6 @@ namespace Organizer
         {
             InitializeComponent();
             Tasks_GridView.Columns[0].Width = Tasks_GridView.Width;
-            Saver.Directory = "test.bin";
             TaskGroup.Load();
             TaskGroup.Show(Groups_GridView);
             NameTask_TextBox_TextChanged(NameTask_TextBox, null);
@@ -187,6 +186,12 @@ namespace Organizer
         private void Save_Click(object sender, EventArgs e)
         {
             TaskGroup.Save();
+        }
+
+        private void AddGroup_Button_Click(object sender, EventArgs e)
+        {
+            new TaskGroup(GroupName_Box.Text);
+            TaskGroup.Show(Groups_GridView);
         }
     }
 }

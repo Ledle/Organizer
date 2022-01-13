@@ -30,7 +30,6 @@
         {
             this.Groups_GridView = new System.Windows.Forms.DataGridView();
             this.Groups_Column = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.Tasks_GridView = new System.Windows.Forms.DataGridView();
             this.Tasks_Column = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Task_Panel = new System.Windows.Forms.Panel();
@@ -52,6 +51,7 @@
             this.Cycle1_Button = new System.Windows.Forms.Button();
             this.Remind1_Button = new System.Windows.Forms.Button();
             this.CompleteDate1_Button = new System.Windows.Forms.Button();
+            this.calendar1 = new Organizer.Calendar();
             ((System.ComponentModel.ISupportInitialize)(this.Groups_GridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tasks_GridView)).BeginInit();
             this.Task_Panel.SuspendLayout();
@@ -83,16 +83,6 @@
             this.Groups_Column.HeaderText = "Column1";
             this.Groups_Column.Name = "Groups_Column";
             this.Groups_Column.Width = 217;
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.monthCalendar1.BackColor = System.Drawing.SystemColors.Control;
-            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(4, 3);
-            this.monthCalendar1.Location = new System.Drawing.Point(223, -13);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 3;
             // 
             // Tasks_GridView
             // 
@@ -319,18 +309,25 @@
             this.CompleteDate1_Button.Text = "Дата выполнения";
             this.CompleteDate1_Button.UseVisualStyleBackColor = true;
             // 
+            // calendar1
+            // 
+            this.calendar1.Location = new System.Drawing.Point(216, 0);
+            this.calendar1.Name = "calendar1";
+            this.calendar1.Size = new System.Drawing.Size(651, 435);
+            this.calendar1.TabIndex = 17;
+            // 
             // Calendar_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1083, 490);
+            this.Controls.Add(this.calendar1);
             this.Controls.Add(this.Add_Panel);
             this.Controls.Add(this.AddButtons_Panel);
             this.Controls.Add(this.Groups_GridView);
             this.Controls.Add(this.Task_Panel);
             this.Controls.Add(this.Tasks_GridView);
-            this.Controls.Add(this.monthCalendar1);
             this.MinimumSize = new System.Drawing.Size(1099, 529);
             this.Name = "Calendar_Form";
             this.Text = "Calendar_Form";
@@ -349,7 +346,6 @@
 
         private System.Windows.Forms.DataGridView Groups_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Groups_Column;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.DataGridView Tasks_GridView;
         private System.Windows.Forms.DataGridViewButtonColumn Tasks_Column;
         private System.Windows.Forms.Panel Task_Panel;
@@ -371,5 +367,6 @@
         private System.Windows.Forms.Button Cycle1_Button;
         private System.Windows.Forms.Button Remind1_Button;
         private System.Windows.Forms.Button CompleteDate1_Button;
+        private Calendar calendar1;
     }
 }
