@@ -28,7 +28,7 @@ namespace Organizer
             priority = 0;
             this.name = name;
         }
-        public void Add(Task t)
+        public void Add(Event t)
         {
             if (!tasks.Contains(t))
             {

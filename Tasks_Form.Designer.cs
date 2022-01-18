@@ -77,7 +77,7 @@ namespace Organizer
             this.Task_Panel.Controls.Add(this.TaskNotes_Textbox);
             this.Task_Panel.Controls.Add(this.SubTasks);
             this.Task_Panel.Controls.Add(this.Complete_Box);
-            this.Task_Panel.Location = new System.Drawing.Point(587, 2);
+            this.Task_Panel.Location = new System.Drawing.Point(587, 0);
             this.Task_Panel.Name = "Task_Panel";
             this.Task_Panel.Size = new System.Drawing.Size(211, 441);
             this.Task_Panel.TabIndex = 7;
@@ -182,7 +182,8 @@ namespace Organizer
             this.RemindDate_Picker1.Name = "RemindDate_Picker1";
             this.RemindDate_Picker1.Size = new System.Drawing.Size(148, 23);
             this.RemindDate_Picker1.TabIndex = 12;
-            this.RemindDate_Picker1.Visible = false;            // 
+            this.RemindDate_Picker1.Visible = false;
+            // 
             // NameTask_TextBox
             // 
             this.NameTask_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -227,6 +228,7 @@ namespace Organizer
             this.button1.TabIndex = 9;
             this.button1.Text = "Удалить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Cycle1_Button
             // 
@@ -364,7 +366,7 @@ namespace Organizer
             // 
             this.GroupName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GroupName_Box.Location = new System.Drawing.Point(1, 420);
+            this.GroupName_Box.Location = new System.Drawing.Point(0, 420);
             this.GroupName_Box.Name = "GroupName_Box";
             this.GroupName_Box.Size = new System.Drawing.Size(142, 23);
             this.GroupName_Box.TabIndex = 14;

@@ -20,10 +20,11 @@ namespace Organizer
         public Calendar()
         {
             InitializeComponent();
-            Month_GridView.RowTemplate.Height = Month_GridView.Height/6;
+            Month_GridView.RowTemplate.Height = Month_GridView.Height / 6;
             for (int i = 0; i < 6; i++)
             {
                 Month_GridView.Rows.Add();
+                Month_GridView.Rows[i].Height = Month_GridView.Height / 6 - 5;
             }
             Month_GridView.Height = Month_GridView.RowTemplate.Height * 6;
             ChangeMonth();
@@ -119,6 +120,15 @@ namespace Organizer
         public DateTime SelectedDate
         {
             get { return selecteddate; }
+        }
+
+        private void Month_GridView_Resize(object sender, EventArgs e)
+        {
+            int h = Month_GridView.Height / 6;
+            for (int i = 0; i < 6; i++)
+            {
+                Month_GridView.Rows[i].Height = h - 4;
+            }
         }
     }
 }

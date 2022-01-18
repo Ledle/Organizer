@@ -29,7 +29,17 @@ namespace Organizer
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Month_GridView = new System.Windows.Forms.DataGridView();
+            this.Back_Button = new System.Windows.Forms.Button();
+            this.Forward_Button = new System.Windows.Forms.Button();
+            this.MonthName_Box = new System.Windows.Forms.TextBox();
             this.Monday = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Tuesday = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Wednesday = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -37,9 +47,6 @@ namespace Organizer
             this.Friday = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Saturday = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Sunday = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Back_Button = new System.Windows.Forms.Button();
-            this.Forward_Button = new System.Windows.Forms.Button();
-            this.MonthName_Box = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Month_GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,52 +75,7 @@ namespace Organizer
             this.Month_GridView.Size = new System.Drawing.Size(683, 382);
             this.Month_GridView.TabIndex = 0;
             this.Month_GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Month_GridView_CellContentClick);
-            // 
-            // Monday
-            // 
-            this.Monday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Monday.HeaderText = "Понедельник";
-            this.Monday.Name = "Monday";
-            // 
-            // Tuesday
-            // 
-            this.Tuesday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Tuesday.HeaderText = "Вторник";
-            this.Tuesday.Name = "Tuesday";
-            // 
-            // Wednesday
-            // 
-            this.Wednesday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Wednesday.HeaderText = "Среда";
-            this.Wednesday.Name = "Wednesday";
-            // 
-            // Thursday
-            // 
-            this.Thursday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Thursday.HeaderText = "Четверг";
-            this.Thursday.Name = "Thursday";
-            // 
-            // Friday
-            // 
-            this.Friday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Friday.HeaderText = "Пятница";
-            this.Friday.Name = "Friday";
-            this.Friday.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Friday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Saturday
-            // 
-            this.Saturday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Saturday.HeaderText = "Суббота";
-            this.Saturday.Name = "Saturday";
-            this.Saturday.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Saturday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Sunday
-            // 
-            this.Sunday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Sunday.HeaderText = "Воскресенье";
-            this.Sunday.Name = "Sunday";
+            this.Month_GridView.Resize += new System.EventHandler(this.Month_GridView_Resize);
             // 
             // Back_Button
             // 
@@ -147,6 +109,73 @@ namespace Organizer
             this.MonthName_Box.TabIndex = 3;
             this.MonthName_Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // Monday
+            // 
+            this.Monday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Monday.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Monday.HeaderText = "Понедельник";
+            this.Monday.Name = "Monday";
+            // 
+            // Tuesday
+            // 
+            this.Tuesday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Tuesday.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Tuesday.HeaderText = "Вторник";
+            this.Tuesday.Name = "Tuesday";
+            // 
+            // Wednesday
+            // 
+            this.Wednesday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Wednesday.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Wednesday.HeaderText = "Среда";
+            this.Wednesday.Name = "Wednesday";
+            // 
+            // Thursday
+            // 
+            this.Thursday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Thursday.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Thursday.HeaderText = "Четверг";
+            this.Thursday.Name = "Thursday";
+            // 
+            // Friday
+            // 
+            this.Friday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Friday.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Friday.HeaderText = "Пятница";
+            this.Friday.Name = "Friday";
+            this.Friday.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Friday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Saturday
+            // 
+            this.Saturday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Saturday.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Saturday.HeaderText = "Суббота";
+            this.Saturday.Name = "Saturday";
+            this.Saturday.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Saturday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Sunday
+            // 
+            this.Sunday.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Sunday.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Sunday.HeaderText = "Воскресенье";
+            this.Sunday.Name = "Sunday";
+            // 
             // Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -166,6 +195,9 @@ namespace Organizer
         #endregion
 
         private System.Windows.Forms.DataGridView Month_GridView;
+        private System.Windows.Forms.Button Back_Button;
+        private System.Windows.Forms.Button Forward_Button;
+        private System.Windows.Forms.TextBox MonthName_Box;
         private System.Windows.Forms.DataGridViewButtonColumn Monday;
         private System.Windows.Forms.DataGridViewButtonColumn Tuesday;
         private System.Windows.Forms.DataGridViewButtonColumn Wednesday;
@@ -173,8 +205,5 @@ namespace Organizer
         private System.Windows.Forms.DataGridViewButtonColumn Friday;
         private System.Windows.Forms.DataGridViewButtonColumn Saturday;
         private System.Windows.Forms.DataGridViewButtonColumn Sunday;
-        private System.Windows.Forms.Button Back_Button;
-        private System.Windows.Forms.Button Forward_Button;
-        private System.Windows.Forms.TextBox MonthName_Box;
     }
 }

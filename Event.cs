@@ -23,6 +23,13 @@ namespace Organizer
             name = "";
             description = "";
         }
+        public Event(String name)
+        {
+            date = new DateTime(0);
+            cycle = TimeSpan.Zero;
+            this.name = name;
+            description = "";
+        }
         public Event(Event parent)
         {
             date = new DateTime(0);

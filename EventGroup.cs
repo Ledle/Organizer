@@ -47,5 +47,28 @@ namespace Organizer
             groups = (List<Group>)formatter.Deserialize(fl);
             fl.Close();
         }
+        public List<Event> GetEvents(DateTime date)
+        {
+            List<Event> events = new List<Event>();
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                if(tasks[i].Date.Year == date.Year && tasks[i].Date.Month == date.Month && tasks[i].Date.Day == date.Day)
+                {
+                    events.Add(tasks[i]);
+                }
+            }
+            return events;
+        }
+        public static void ShowEvents(System.Windows.Forms.DataGridView gridView, List<Event> events)
+        {
+            Event tsk;
+            gridView.Rows.Clear();
+            for (int i = 0; i < events.Count; i++)
+            {
+                tsk = events[i];
+                gridView.Rows.Add(tsk.Name);
+                gridView.Rows[i].Tag = tsk;
+            }
+        }
     }
 }

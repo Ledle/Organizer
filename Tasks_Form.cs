@@ -33,7 +33,54 @@ namespace Organizer
             grp.ShowTasks(Tasks_GridView);
             NameTask_TextBox.Text = "";
         }
+        private void AddGroup_Button_Click(object sender, EventArgs e)
+        {
+            new TaskGroup(GroupName_Box.Text);
+            TaskGroup.Show(Groups_GridView);
+        }
 
+        private void Delete_Button_Click(object sender, EventArgs e)
+        {
+            (sender as Button).Parent.Hide();
+            Task t = (sender as Button).Parent.Tag as Task;
+            Group grp = t.Group;
+            grp.Remove(t);
+            grp.ShowTasks(Tasks_GridView);
+        }
+        private void CompleteDate1_Button_Click(object sender, EventArgs e)
+        {
+            CompleteDate_Picker1.Visible = !CompleteDate_Picker1.Visible;
+            RemindDate_Picker1.Hide();
+        }
+        private void Remind1_Button_Click(object sender, EventArgs e)
+        {
+            RemindDate_Picker1.Visible = !RemindDate_Picker1.Visible;
+            CompleteDate_Picker1.Hide();
+        }
+
+        private void CompleteDate_Button_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            Task t = b.Parent.Tag as Task;
+            CompleteDate_Picker.Value = t.CompleteDate;
+            CompleteDate_Picker.Visible = !CompleteDate_Picker.Visible;
+            RemindDate_Picker.Hide();
+        }
+
+        private void Remind_Button_Click(object sender, EventArgs e)
+        {
+            RemindDate_Picker.Visible = !RemindDate_Picker.Visible;
+            CompleteDate_Picker.Hide();
+        }
+
+        private void CompleteDate_Picker_ValueChanged(object sender, EventArgs e)
+        {
+            (Task_Panel.Tag as Task).CompleteDate = CompleteDate_Picker.Value;
+        }
+        private void Save_Click(object sender, EventArgs e)
+        {
+            TaskGroup.Save();
+        }
         private void Groups_GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Task_Panel.Hide();
@@ -43,14 +90,6 @@ namespace Organizer
             Add_Panel.Show();
             Group grp = (Group)Groups_GridView.Rows[e.RowIndex].Tag;
             grp.ShowTasks(Tasks_GridView);
-        }
-        private void Task_Show(Task tsk)
-        {
-            Task_Panel.Show();
-            Task_Panel.Tag = tsk;
-            TaskName_Textbox.Text = tsk.Name;
-            TaskNotes_Textbox.Text = tsk.Description;
-            Complete_Box.Checked = tsk.Completed;
         }
 
         private void Tasks_GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -81,26 +120,9 @@ namespace Organizer
                 }
             }
         }
-
-        private void Complete_Box_CheckedChanged(object sender, EventArgs e)
-        {
-            Boolean f = (sender as CheckBox).Checked;
-            Task t = (sender as CheckBox).Parent.Tag as Task;
-            if (f) { t.Complete(); }
-            else { t.Uncomplete(); }
-        }
-
-        private void Delete_Button_Click(object sender, EventArgs e)
-        {
-            (sender as Button).Parent.Hide();
-            Task t = (sender as Button).Parent.Tag as Task;
-            Group grp = t.Group;
-            grp.Remove(t);
-            grp.ShowTasks(Tasks_GridView);
-        }
         private void NameTask_TextBox_TextChanged(object sender, EventArgs e)
         {
-            if((sender as TextBox).Text != "")
+            if ((sender as TextBox).Text != "")
             {
                 (sender as TextBox).Parent.Location = new Point(234, AddButtons_Panel.Location.Y - 28);
                 AddButtons_Panel.Show();
@@ -112,45 +134,27 @@ namespace Organizer
                 AddButtons_Panel.Hide();
             }
         }
-        private void CompleteDate1_Button_Click(object sender, EventArgs e)
+
+        private void Complete_Box_CheckedChanged(object sender, EventArgs e)
         {
-            CompleteDate_Picker1.Visible = !CompleteDate_Picker1.Visible;
-            RemindDate_Picker1.Hide();
-        }
-        private void Remind1_Button_Click(object sender, EventArgs e)
-        {
-            RemindDate_Picker1.Visible = !RemindDate_Picker1.Visible;
-            CompleteDate_Picker1.Hide();
+            Boolean f = (sender as CheckBox).Checked;
+            Task t = (sender as CheckBox).Parent.Tag as Task;
+            if (f) { t.Complete(); }
+            else { t.Uncomplete(); }
         }
 
-        private void CompleteDate_Button_Click(object sender, EventArgs e)
+        private void Task_Show(Task tsk)
         {
-            Button b = sender as Button;
-            Task t = b.Parent.Tag as Task;
-            CompleteDate_Picker.Value = t.CompleteDate; 
-            CompleteDate_Picker.Visible = !CompleteDate_Picker.Visible;
-            RemindDate_Picker.Hide();
+            Task_Panel.Show();
+            Task_Panel.Tag = tsk;
+            TaskName_Textbox.Text = tsk.Name;
+            TaskNotes_Textbox.Text = tsk.Description;
+            Complete_Box.Checked = tsk.Completed;
         }
 
-        private void Remind_Button_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            RemindDate_Picker.Visible = !RemindDate_Picker.Visible;
-            CompleteDate_Picker.Hide();
-        }
 
-        private void CompleteDate_Picker_ValueChanged(object sender, EventArgs e)
-        {
-            (Task_Panel.Tag as Task).CompleteDate = CompleteDate_Picker.Value;
-        }
-        private void Save_Click(object sender, EventArgs e)
-        {
-            TaskGroup.Save();
-        }
-
-        private void AddGroup_Button_Click(object sender, EventArgs e)
-        {
-            new TaskGroup(GroupName_Box.Text);
-            TaskGroup.Show(Groups_GridView);
         }
     }
 }

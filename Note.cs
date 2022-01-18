@@ -11,7 +11,9 @@ namespace Organizer
     {
         private String text;
         private NoteGroup group;
-        public Note() {}
+        public Note() {
+            text = "";
+        }
         public Note(String text)
         {
             this.text = text;
